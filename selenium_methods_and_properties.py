@@ -9,7 +9,6 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
 import unittest
-import time
 
 
 class LearningSelenium(unittest.TestCase):
@@ -65,7 +64,6 @@ class LearningSelenium(unittest.TestCase):
         find_courses = self.driver.find_elements_by_xpath(courses_listing)
         for element in find_courses:
             print(element.text)
-        time.sleep(3)
 
     def tearDown(self):
         """Fixture."""
