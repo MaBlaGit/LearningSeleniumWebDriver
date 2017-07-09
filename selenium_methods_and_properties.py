@@ -12,7 +12,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
-import time
+
 
 class LearningSelenium(unittest.TestCase):
     """Testing class."""
@@ -99,7 +99,6 @@ class LearningSelenium(unittest.TestCase):
         # log message to the log file
         LearningSelenium.log.logging_method(switch_to_alert_window.text)
         switch_to_alert_window.accept()
-        time.sleep(5)
             	
     @classmethod
     def tearDownClass(cls):
