@@ -77,12 +77,39 @@ class LearningSelenium(unittest.TestCase):
             csv_data = list()
             for element in find_courses:
                 print(element.text)
+                LearningSelenium.log.logging_method("Found course {0}".format(element.text))
                 csv_data.append(element.text)
                 writer.writerow(csv_data)
                 csv_data.remove(element.text)
         self.driver.close()
         # switching to main window handle
         self.driver.switch_to.window(new_window[0])
+        
+    def test_radio_buttons(self):
+        # locators
+        radio_button = 'bmwradio'
+        # steps
+        locate_radio_button = self.driver.find_element_by_id(radio_button)
+        if locate_radio_button.is_selected() == False:
+            LearningSelenium.log.logging_method("Radibutton {0} located".format(locate_radio_button.get_attribute("id")))
+            locate_radio_button.click()
+            LearningSelenium.log.logging_method("Radiobutton type: {0} id: {1} clicked".format(locate_radio_button.get_attribute("type"), locate_radio_button.get_attribute("id")))
+    
+    def test_select_dropdown_menu(self):
+        # locators
+        select_menu = 'carselect'
+        # steps
+        locate_dropdown_menu = self.driver.find_element_by_id(select_menu)
+        self.assertTrue(locate_dropdown_menu)
+        LearningSelenium.log.logging_method("Dropdown menu {0} located".format(locate_dropdown_menu.get_attribute("name")))
+        select_menu = Select(locate_dropdown_menu)
+        # select items from dropdown list by tvisible text
+        for element in select_menu.options:
+            print(element.text)
+            select_menu.select_by_visible_text(element.text)
+	# select items from dropdown list by index
+        for element in range(len(select_menu.options)):
+            select_menu.select_by_index(element)
 
     def test_properties_webdriver_class_part_two(self):
         # locators 
@@ -94,7 +121,7 @@ class LearningSelenium(unittest.TestCase):
         click_on_alert_button = self.driver.find_element_by_id(alert_button)
         click_on_alert_button.click()
         # switch to alert window
-        switch_to_alert_window = self.driver.switch_to_alert()
+        switch_to_alert_window = self.driver.switch_to.alert
         print(switch_to_alert_window.text)
         # log message to the log file
         LearningSelenium.log.logging_method(switch_to_alert_window.text)
