@@ -77,7 +77,7 @@ class LearningSelenium(unittest.TestCase):
             csv_data = list()
             for element in find_courses:
                 print(element.text)
-                LearningSelenium.log.logging_method("Found course {0}".format(element.text))
+                LearningSelenium.log.logging_method("Found course '{0}'".format(element.text))
                 csv_data.append(element.text)
                 writer.writerow(csv_data)
                 csv_data.remove(element.text)
@@ -91,9 +91,9 @@ class LearningSelenium(unittest.TestCase):
         # steps
         locate_radio_button = self.driver.find_element_by_id(radio_button)
         if locate_radio_button.is_selected() == False:
-            LearningSelenium.log.logging_method("Radibutton {0} located".format(locate_radio_button.get_attribute("id")))
+            LearningSelenium.log.logging_method("Radibutton '{0}' located".format(locate_radio_button.get_attribute("id")))
             locate_radio_button.click()
-            LearningSelenium.log.logging_method("Radiobutton type: {0} id: {1} clicked".format(locate_radio_button.get_attribute("type"), locate_radio_button.get_attribute("id")))
+            LearningSelenium.log.logging_method("Radiobutton type: '{0}' id: '{1}' clicked".format(locate_radio_button.get_attribute("type"), locate_radio_button.get_attribute("id")))
     
     def test_select_dropdown_menu(self):
         # locators
@@ -101,7 +101,7 @@ class LearningSelenium(unittest.TestCase):
         # steps
         locate_dropdown_menu = self.driver.find_element_by_id(select_menu)
         self.assertTrue(locate_dropdown_menu)
-        LearningSelenium.log.logging_method("Dropdown menu {0} located".format(locate_dropdown_menu.get_attribute("name")))
+        LearningSelenium.log.logging_method("Dropdown menu '{0}' located".format(locate_dropdown_menu.get_attribute("name")))
         select_menu = Select(locate_dropdown_menu)
         # select items from dropdown list by tvisible text
         for element in select_menu.options:
@@ -110,7 +110,25 @@ class LearningSelenium(unittest.TestCase):
 	# select items from dropdown list by index
         for element in range(len(select_menu.options)):
             select_menu.select_by_index(element)
-
+            
+    def test_select_multiple_dropdown_menu(self):
+    	# locators
+    	multiple_select_menu = 'multiple-select-example'
+    	# steps
+    	locate_multiple_select_menu = self.driver.find_element_by_id(multiple_select_menu)
+    	self.assertTrue(locate_multiple_select_menu)
+    	LearningSelenium.log.logging_method("Multiple dropdown menu '{0}' located".format(locate_multiple_select_menu.get_attribute("name")))
+    	select_multi_menu = Select(locate_multiple_select_menu)
+    	for element in range(len(select_multi_menu.options)):
+    	    select_multi_menu.select_by_index(element)
+                
+    	for element in select_multi_menu.all_selected_options:
+    	    LearningSelenium.log.logging_method("Element '{0}' located".format(element.text))
+    	    
+    	LearningSelenium.log.logging_method("First element from dropdown menu '{0}''".format(select_multi_menu.first_selected_option.text))
+    	
+    	select_multi_menu.deselect_all()
+    	
     def test_properties_webdriver_class_part_two(self):
         # locators 
         alert_input_field = 'name'
