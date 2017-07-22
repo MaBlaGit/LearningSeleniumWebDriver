@@ -1,0 +1,4 @@
+*.log
+logs
+courses_titles
+__pycache__
