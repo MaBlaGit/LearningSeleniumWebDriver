@@ -1,3 +1,4 @@
 selenium
 ddt
+html-testRunner
 pylint
