@@ -1,6 +1,5 @@
 """Learning Selenium WebDriver Methods and Properties."""
 
-import random
 import unittest
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
@@ -10,13 +9,13 @@ from selenium.webdriver.common.by import By
 
 class SeleniumMethodsAndPropertiesPartTwo(unittest.TestCase):
     """Learn Selenium WebDriver Framework.
-    Radio button menu, drop down menu, multiple select menu,
-    checkbox menu."""
+    Switch to current window, switch to new open tab,
+    switch to alert popup."""
 
     @classmethod
     def setUpClass(cls):
-        """set up test environment."""
-        cls.driver = webdriver.Firefox()
+        """Set up test environment."""
+        cls.driver = webdriver.Chrome()
         cls.driver.maximize_window()
         cls.driver.get('https://letskodeit.teachable.com/p/practice')
 
@@ -62,14 +61,22 @@ class SeleniumMethodsAndPropertiesPartTwo(unittest.TestCase):
             ec.presence_of_all_elements_located((By.XPATH, new_tab_course_listing))
         )
         # loop through each course and check if link of the selected course are clickable.
-        for element in locate_new_tab_courses_listing:
-            print("Course from new tab: " + element.text)
-            element.click()
+        for element in range(len(locate_new_tab_courses_listing)):
+            print("Course from new tab: " + locate_new_tab_courses_listing[element].text)
+            locate_new_tab_courses_listing[element].click()
             locate_course_title = WebDriverWait(self.driver, 10).until(
                 lambda driver: self.driver.find_element_by_xpath(new_tab_course_title)
             )
-            # self.assertEqual(locate_course_title.text.strip(), element.text.strip())
-            self.driver.execute_script("window.history.go(-1)")
+            print("Course title from course page: " + locate_course_title.text)
+            self.driver.execute_script("window.history.go(-1);return false;")
+            # time.sleep(1)
+            locate_new_tab_courses_listing = WebDriverWait(self.driver, 10).until(
+                ec.presence_of_all_elements_located((By.XPATH, new_tab_course_listing))
+            )
+            if element == len(locate_new_tab_courses_listing) - 1:
+                break
+            else:
+                locate_new_tab_courses_listing[element] = locate_new_tab_courses_listing[element + 1]
 
     def test_alert_pop_up(self):
         """Test switching to alert window."""
@@ -86,7 +93,7 @@ class SeleniumMethodsAndPropertiesPartTwo(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        """close test environment."""
+        """Close test environment."""
         cls.driver.quit()
 
 if __name__ == '__main__':

@@ -16,7 +16,7 @@ class SeleniumMethodsAndPropertiesPartOne(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        """set up test environment."""
+        """Set up test environment."""
         cls.driver = webdriver.Chrome()
         cls.driver.maximize_window()
         cls.driver.get('https://letskodeit.teachable.com/p/practice')
@@ -70,5 +70,5 @@ class SeleniumMethodsAndPropertiesPartOne(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        """close test environment."""
+        """Close test environment."""
         cls.driver.quit()
