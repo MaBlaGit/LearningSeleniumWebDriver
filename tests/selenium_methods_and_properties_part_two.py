@@ -69,7 +69,6 @@ class SeleniumMethodsAndPropertiesPartTwo(unittest.TestCase):
             )
             print("Course title from course page: " + locate_course_title.text)
             self.driver.execute_script("window.history.go(-1);return false;")
-            # time.sleep(1)
             locate_new_tab_courses_listing = WebDriverWait(self.driver, 10).until(
                 ec.presence_of_all_elements_located((By.XPATH, new_tab_course_listing))
             )
@@ -95,6 +94,3 @@ class SeleniumMethodsAndPropertiesPartTwo(unittest.TestCase):
     def tearDownClass(cls):
         """Close test environment."""
         cls.driver.quit()
-
-if __name__ == '__main__':
-    unittest.main()

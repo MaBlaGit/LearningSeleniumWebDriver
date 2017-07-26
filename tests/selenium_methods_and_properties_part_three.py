@@ -3,8 +3,6 @@
 import unittest
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as ec
-from selenium.webdriver.common.by import By
 
 
 class SeleniumMethodsAndPropertiesPartThree(unittest.TestCase):
@@ -29,6 +27,31 @@ class SeleniumMethodsAndPropertiesPartThree(unittest.TestCase):
         )
         for element in locate_table:
             print(element.text)
+
+    def test_is_element_displayed(self):
+        """Test if element is displayed.
+        Test send keys into input field."""
+        # locators
+        input_field = 'displayed-text'
+        hide_button = 'hide-textbox'
+        show_button = 'show-textbox'
+        # steps
+        locate_input_field = WebDriverWait(self.driver, 10).until(
+            lambda driver: self.driver.find_element_by_id(input_field)
+        )
+        # scrolling to located element
+        self.driver.execute_script("window.scrollBy(0, 400);")
+        locate_show_button = WebDriverWait(self.driver, 10).until(
+            lambda driver: self.driver.find_element_by_id(show_button)
+        )
+        locate_hide_button = WebDriverWait(self.driver, 10).until(
+            lambda driver: self.driver.find_element_by_id(hide_button)
+        )
+        locate_hide_button.click()
+        if not locate_input_field.is_displayed():
+            locate_show_button.click()
+        locate_input_field.clear()
+        locate_input_field.send_keys("This is for test purpose")
 
     @classmethod
     def tearDownClass(cls):

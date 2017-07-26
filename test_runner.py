@@ -28,7 +28,7 @@ class TestSuite(object):
         """Collect tests into test suites."""
         return unittest.TestSuite([self.selenium_methods_and_properties_one,
                                    self.selenium_methods_and_properties_two,
-                                   self.selenium_methods_and_properties_three,])
+                                   self.selenium_methods_and_properties_three])
 
 if __name__ == '__main__':
     test_suite = TestSuite()
