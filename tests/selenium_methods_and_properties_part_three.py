@@ -13,7 +13,7 @@ class SeleniumMethodsAndPropertiesPartThree(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         """Set up test environment."""
-        cls.driver = webdriver.Chrome()
+        cls.driver = webdriver.Firefox()
         cls.driver.maximize_window()
         cls.driver.get('https://letskodeit.teachable.com/p/practice')
 
@@ -51,12 +51,9 @@ class SeleniumMethodsAndPropertiesPartThree(unittest.TestCase):
         if not locate_input_field.is_displayed():
             locate_show_button.click()
         locate_input_field.clear()
-        locate_input_field.send_keys("This is for test purpose")
+        locate_input_field.send_keys("This is for learning purpose")
 
     @classmethod
     def tearDownClass(cls):
         """Close test environment."""
         cls.driver.quit()
-
-if __name__ == '__main__':
-    unittest.main()

@@ -8,6 +8,8 @@ from LearningSeleniumWebDriver.tests.selenium_methods_and_properties_part_two im
     SeleniumMethodsAndPropertiesPartTwo
 from LearningSeleniumWebDriver.tests.selenium_methods_and_properties_part_three import \
     SeleniumMethodsAndPropertiesPartThree
+from LearningSeleniumWebDriver.tests.selenium_methods_and_properties_part_four import \
+    SeleniumMethodsAndPropertiesPartFour
 
 
 class TestSuite(object):
@@ -23,12 +25,16 @@ class TestSuite(object):
         self.selenium_methods_and_properties_three = unittest.TestLoader().loadTestsFromTestCase(
             SeleniumMethodsAndPropertiesPartThree
         )
+        self.selenium_methods_and_properties_four = unittest.TestLoader().loadTestsFromTestCase(
+            SeleniumMethodsAndPropertiesPartFour
+        )
 
     def run_test_methods_and_properties_suite(self):
         """Collect tests into test suites."""
         return unittest.TestSuite([self.selenium_methods_and_properties_one,
                                    self.selenium_methods_and_properties_two,
-                                   self.selenium_methods_and_properties_three])
+                                   self.selenium_methods_and_properties_three,
+                                   self.selenium_methods_and_properties_four,])
 
 if __name__ == '__main__':
     test_suite = TestSuite()
