@@ -22,20 +22,24 @@ class SeleniumMethodsAndPropertiesPartTwo(unittest.TestCase):
     def test_switch_to_current_window(self):
         """Test switching to current window handle
         and printing out current courses content to the console."""
+
         # locators
         switch_to_window_button = 'openwindow'
         courses_in_new_window = '//div[@class="course-listing-title"]'
+
         # steps
         locate_switch_to_window_button = WebDriverWait(self.driver, 10).until(
             ec.visibility_of_element_located((By.ID, switch_to_window_button))
         )
         locate_switch_to_window_button.click()
+
         # take all window handles into list
         all_window_handles = self.driver.window_handles
+
         # switch to newest window handle
         self.driver.switch_to.window(all_window_handles[1])
         locate_courses_in_new_window = WebDriverWait(self.driver, 10).until(
-            ec.presence_of_all_elements_located((By.XPATH, courses_in_new_window))
+            lambda driver: self.driver.find_elements_by_xpath(courses_in_new_window)
         )
         # print courses titles into console
         for element in locate_courses_in_new_window:
@@ -46,10 +50,12 @@ class SeleniumMethodsAndPropertiesPartTwo(unittest.TestCase):
     def test_switch_to_tab(self):
         """Test open new tab, switching to current window
         and printing out course content to the console."""
+
         # locators
         open_tab_button = 'opentab'
         new_tab_course_listing = '//div[@class="course-listing-title"]'
         new_tab_course_title = '//h1[@class="course-title"]'
+
         # actions
         locate_open_tab_button = WebDriverWait(self.driver, 10).until(
             ec.visibility_of_element_located((By.ID, open_tab_button))
@@ -60,6 +66,7 @@ class SeleniumMethodsAndPropertiesPartTwo(unittest.TestCase):
         locate_new_tab_courses_listing = WebDriverWait(self.driver, 10).until(
             ec.presence_of_all_elements_located((By.XPATH, new_tab_course_listing))
         )
+
         # loop through each course and check if link of the selected course are clickable.
         for element in range(len(locate_new_tab_courses_listing)):
             print("Course from new tab: " + locate_new_tab_courses_listing[element].text)
@@ -79,11 +86,13 @@ class SeleniumMethodsAndPropertiesPartTwo(unittest.TestCase):
 
     def test_alert_pop_up(self):
         """Test switching to alert window."""
+
         # locators
         alert_button = 'alertbtn'
+
         # steps
         locate_alert_button = WebDriverWait(self.driver, 10).until(
-            lambda driver: self.driver.find_element_by_id(alert_button)
+            ec.visibility_of_element_located((By.ID, alert_button))
         )
         locate_alert_button.click()
         alert = self.driver.switch_to.alert
