@@ -15,7 +15,7 @@ class SeleniumMethodsAndPropertiesPartTwo(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         """Set up test environment."""
-        cls.driver = webdriver.Firefox()
+        cls.driver = webdriver.Chrome()
         cls.driver.maximize_window()
         cls.driver.get('https://letskodeit.teachable.com/p/practice')
 
