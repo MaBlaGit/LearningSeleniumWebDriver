@@ -16,7 +16,7 @@ Learning Selenium WebDriver methods and properties with Data-driven testing (ddt
 
 1.Clone/Download project: https://github.com/MaBlaGit/LearningSeleniumWebDriver
 
-2.Install __virtialenvwrapper__
+2.Install __virtiulenvwrapper__
 ```
  $ pip install virtualenvwrapper
 ```
