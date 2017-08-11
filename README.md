@@ -43,6 +43,7 @@ $ make deps
 
 
 __geckodriver__: https://github.com/mozilla/geckodriver/releases
+
 __chromedriver__: https://sites.google.com/a/chromium.org/chromedriver/
 
 (example below shows how add to path __geckodriver__)
